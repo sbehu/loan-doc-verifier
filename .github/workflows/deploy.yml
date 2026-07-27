@@ -32,3 +32,11 @@ jobs:
         run: |
           docker build -t $REGISTRY/$ECR_REPOSITORY:latest .
           docker push $REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Force ECS to redeploy with the new image
+        run: |
+          aws ecs update-service \
+            --cluster loan-doc-verifier-cluster \
+            --service loan-doc-verifier-service \
+            --force-new-deployment \
+            --region $AWS_REGION
