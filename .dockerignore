@@ -1,0 +1,11 @@
+.venv
+.git
+__pycache__
+*.pyc
+.env
+dataset_creation/
+experiments/
+interview_prep/
+data/documents/_uploads/
+uv.lock.bak
+README.md

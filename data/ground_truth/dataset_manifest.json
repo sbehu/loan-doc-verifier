@@ -1,0 +1,229 @@
+[
+  {
+    "persona_id": "P001_clean_salaried",
+    "scenario": "clean_salaried",
+    "is_fraud": false,
+    "fraud_type": null,
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P002_clean_thin_file",
+    "scenario": "clean_thin_file",
+    "is_fraud": false,
+    "fraud_type": null,
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  },
+  {
+    "persona_id": "P003_doc_tamper_careless",
+    "scenario": "doc_tamper_careless",
+    "is_fraud": true,
+    "fraud_type": "doc_tamper_careless",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  },
+  {
+    "persona_id": "P004_doc_tamper_careful",
+    "scenario": "doc_tamper_careful",
+    "is_fraud": true,
+    "fraud_type": "doc_tamper_careful",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  },
+  {
+    "persona_id": "P005_identity_mismatch",
+    "scenario": "identity_mismatch",
+    "is_fraud": true,
+    "fraud_type": "identity_mismatch",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P006_income_mismatch",
+    "scenario": "income_mismatch",
+    "is_fraud": true,
+    "fraud_type": "income_mismatch",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P007_signature_forged",
+    "scenario": "signature_forged",
+    "is_fraud": true,
+    "fraud_type": "signature_forged",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P008_photo_mismatch",
+    "scenario": "photo_mismatch",
+    "is_fraud": true,
+    "fraud_type": "photo_mismatch",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P009_fully_fabricated",
+    "scenario": "fully_fabricated",
+    "is_fraud": true,
+    "fraud_type": "fully_fabricated",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P010_stale_address",
+    "scenario": "stale_address",
+    "is_fraud": true,
+    "fraud_type": "stale_address",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  },
+  {
+    "persona_id": "P011_clean_thin_file_noisy",
+    "scenario": "clean_thin_file_noisy",
+    "is_fraud": false,
+    "fraud_type": null,
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  },
+  {
+    "persona_id": "P012_clean_multi_upi_accounts",
+    "scenario": "clean_multi_upi_accounts",
+    "is_fraud": false,
+    "fraud_type": null,
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement_gpay.png",
+      "upi_statement_paytm.png",
+      "upi_statement_phonepe.png"
+    ]
+  },
+  {
+    "persona_id": "P013_document_recycling",
+    "scenario": "document_recycling",
+    "is_fraud": true,
+    "fraud_type": "document_recycling",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "salary_slip.png",
+      "selfie.png",
+      "signature_reference.png"
+    ]
+  },
+  {
+    "persona_id": "P014_document_recycling",
+    "scenario": "document_recycling",
+    "is_fraud": true,
+    "fraud_type": "document_recycling",
+    "documents": [
+      "aadhaar.png",
+      "application_form.png",
+      "bank_statement.png",
+      "electricity_bill.png",
+      "pan.png",
+      "selfie.png",
+      "signature_reference.png",
+      "upi_statement.png"
+    ]
+  }
+]

@@ -1,0 +1,1202 @@
+{
+  "P001_clean_salaried": {
+    "persona_id": "P001_clean_salaried",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 27973.01,
+    "transactions": [
+      {
+        "date": "2026-04-06",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -820.98,
+        "utr": "260406115372",
+        "balance": 27152.03
+      },
+      {
+        "date": "2026-04-15",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2704.05,
+        "utr": "260415141548",
+        "balance": 24447.98
+      },
+      {
+        "date": "2026-04-15",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1382.16,
+        "utr": "260415071809",
+        "balance": 23065.82
+      },
+      {
+        "date": "2026-04-16",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -2434.68,
+        "utr": "260416731705",
+        "balance": 20631.14
+      },
+      {
+        "date": "2026-04-17",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -449.76,
+        "utr": "260417786596",
+        "balance": 20181.38
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Zacharia, Rattan and Lanka",
+        "type": "NEFT/CR",
+        "amount": 52505,
+        "utr": "260426960732",
+        "balance": 72686.38
+      },
+      {
+        "date": "2026-05-01",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -1133.83,
+        "utr": "260501974545",
+        "balance": 71552.55
+      },
+      {
+        "date": "2026-05-02",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1265.09,
+        "utr": "260502156916",
+        "balance": 70287.46
+      },
+      {
+        "date": "2026-05-02",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1177.85,
+        "utr": "260502956129",
+        "balance": 69109.61
+      },
+      {
+        "date": "2026-05-05",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1498.27,
+        "utr": "260505517359",
+        "balance": 67611.34
+      },
+      {
+        "date": "2026-05-06",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -480.07,
+        "utr": "260506050337",
+        "balance": 67131.27
+      },
+      {
+        "date": "2026-05-12",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -12811.87,
+        "utr": "260512920305",
+        "balance": 54319.4
+      },
+      {
+        "date": "2026-05-14",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -592.53,
+        "utr": "260514253166",
+        "balance": 53726.87
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Zacharia, Rattan and Lanka",
+        "type": "NEFT/CR",
+        "amount": 52505,
+        "utr": "260526160329",
+        "balance": 106231.87
+      },
+      {
+        "date": "2026-06-05",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1030.49,
+        "utr": "260605071090",
+        "balance": 105201.38
+      },
+      {
+        "date": "2026-06-09",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -913.51,
+        "utr": "260609222093",
+        "balance": 104287.87
+      },
+      {
+        "date": "2026-06-09",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -723.19,
+        "utr": "260609292052",
+        "balance": 103564.68
+      },
+      {
+        "date": "2026-06-12",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1044.46,
+        "utr": "260612469715",
+        "balance": 102520.22
+      },
+      {
+        "date": "2026-06-15",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -695.79,
+        "utr": "260615800691",
+        "balance": 101824.43
+      },
+      {
+        "date": "2026-06-18",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1731.09,
+        "utr": "260618569041",
+        "balance": 100093.34
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Zacharia, Rattan and Lanka",
+        "type": "NEFT/CR",
+        "amount": 52505,
+        "utr": "260625850155",
+        "balance": 152598.34
+      }
+    ]
+  },
+  "P005_identity_mismatch": {
+    "persona_id": "P005_identity_mismatch",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 11561.18,
+    "transactions": [
+      {
+        "date": "2026-04-02",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -14571.9,
+        "utr": "260402266086",
+        "balance": -3010.72
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -571.03,
+        "utr": "260405116567",
+        "balance": -3581.75
+      },
+      {
+        "date": "2026-04-06",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -628.26,
+        "utr": "260406917890",
+        "balance": -4210.01
+      },
+      {
+        "date": "2026-04-13",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1390.79,
+        "utr": "260413495233",
+        "balance": -5600.8
+      },
+      {
+        "date": "2026-04-15",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -557.45,
+        "utr": "260415440771",
+        "balance": -6158.25
+      },
+      {
+        "date": "2026-04-17",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -2306.95,
+        "utr": "260417983301",
+        "balance": -8465.2
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Desai LLC",
+        "type": "NEFT/CR",
+        "amount": 25806,
+        "utr": "260426220549",
+        "balance": 17340.8
+      },
+      {
+        "date": "2026-05-01",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -923.49,
+        "utr": "260501263059",
+        "balance": 16417.31
+      },
+      {
+        "date": "2026-05-04",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -434.38,
+        "utr": "260504848194",
+        "balance": 15982.93
+      },
+      {
+        "date": "2026-05-04",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -14394.51,
+        "utr": "260504455965",
+        "balance": 1588.42
+      },
+      {
+        "date": "2026-05-19",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1223.42,
+        "utr": "260519816977",
+        "balance": 365.0
+      },
+      {
+        "date": "2026-05-20",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -990.95,
+        "utr": "260520263873",
+        "balance": -625.95
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Desai LLC",
+        "type": "NEFT/CR",
+        "amount": 25806,
+        "utr": "260526867170",
+        "balance": 25180.05
+      },
+      {
+        "date": "2026-06-06",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -430.95,
+        "utr": "260606605306",
+        "balance": 24749.1
+      },
+      {
+        "date": "2026-06-07",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -808.66,
+        "utr": "260607122902",
+        "balance": 23940.44
+      },
+      {
+        "date": "2026-06-07",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1500.45,
+        "utr": "260607438744",
+        "balance": 22439.99
+      },
+      {
+        "date": "2026-06-09",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -403.97,
+        "utr": "260609130540",
+        "balance": 22036.02
+      },
+      {
+        "date": "2026-06-10",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1797.85,
+        "utr": "260610349494",
+        "balance": 20238.17
+      },
+      {
+        "date": "2026-06-16",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1068.66,
+        "utr": "260616963441",
+        "balance": 19169.51
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Desai LLC",
+        "type": "NEFT/CR",
+        "amount": 25806,
+        "utr": "260625779433",
+        "balance": 44975.51
+      }
+    ]
+  },
+  "P006_income_mismatch": {
+    "persona_id": "P006_income_mismatch",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 21327.88,
+    "transactions": [
+      {
+        "date": "2026-04-01",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -2049.38,
+        "utr": "260401747143",
+        "balance": 19278.5
+      },
+      {
+        "date": "2026-04-06",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -522.41,
+        "utr": "260406321004",
+        "balance": 18756.09
+      },
+      {
+        "date": "2026-04-09",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1557.84,
+        "utr": "260409194429",
+        "balance": 17198.25
+      },
+      {
+        "date": "2026-04-13",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1385.24,
+        "utr": "260413006770",
+        "balance": 15813.01
+      },
+      {
+        "date": "2026-04-20",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -1480.55,
+        "utr": "260420615184",
+        "balance": 14332.46
+      },
+      {
+        "date": "2026-04-21",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -13944.16,
+        "utr": "260421142363",
+        "balance": 388.3
+      },
+      {
+        "date": "2026-04-21",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -551.32,
+        "utr": "260421245690",
+        "balance": -163.02
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Chahal-Dalal",
+        "type": "NEFT/CR",
+        "amount": 36668,
+        "utr": "260426190121",
+        "balance": 36504.98
+      },
+      {
+        "date": "2026-05-01",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1393.45,
+        "utr": "260501142401",
+        "balance": 35111.53
+      },
+      {
+        "date": "2026-05-02",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1148.11,
+        "utr": "260502151555",
+        "balance": 33963.42
+      },
+      {
+        "date": "2026-05-05",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -1735.04,
+        "utr": "260505926835",
+        "balance": 32228.38
+      },
+      {
+        "date": "2026-05-07",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1374.34,
+        "utr": "260507908044",
+        "balance": 30854.04
+      },
+      {
+        "date": "2026-05-12",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -614.67,
+        "utr": "260512535650",
+        "balance": 30239.37
+      },
+      {
+        "date": "2026-05-13",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -239.52,
+        "utr": "260513837861",
+        "balance": 29999.85
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Chahal-Dalal",
+        "type": "NEFT/CR",
+        "amount": 36668,
+        "utr": "260526226803",
+        "balance": 66667.85
+      },
+      {
+        "date": "2026-06-05",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -9809.95,
+        "utr": "260605243691",
+        "balance": 56857.9
+      },
+      {
+        "date": "2026-06-06",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1460.57,
+        "utr": "260606585175",
+        "balance": 55397.33
+      },
+      {
+        "date": "2026-06-08",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -228.55,
+        "utr": "260608622809",
+        "balance": 55168.78
+      },
+      {
+        "date": "2026-06-10",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -587.86,
+        "utr": "260610507800",
+        "balance": 54580.92
+      },
+      {
+        "date": "2026-06-17",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -937.41,
+        "utr": "260617575967",
+        "balance": 53643.51
+      },
+      {
+        "date": "2026-06-20",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1239.1,
+        "utr": "260620614216",
+        "balance": 52404.41
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Chahal-Dalal",
+        "type": "NEFT/CR",
+        "amount": 36668,
+        "utr": "260625502573",
+        "balance": 89072.41
+      }
+    ]
+  },
+  "P007_signature_forged": {
+    "persona_id": "P007_signature_forged",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 38175.23,
+    "transactions": [
+      {
+        "date": "2026-04-14",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1411.85,
+        "utr": "260414812220",
+        "balance": 36763.38
+      },
+      {
+        "date": "2026-04-16",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -477.88,
+        "utr": "260416573447",
+        "balance": 36285.5
+      },
+      {
+        "date": "2026-04-17",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1393.83,
+        "utr": "260417233214",
+        "balance": 34891.67
+      },
+      {
+        "date": "2026-04-18",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -10563.48,
+        "utr": "260418019900",
+        "balance": 24328.19
+      },
+      {
+        "date": "2026-04-18",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2456.86,
+        "utr": "260418160466",
+        "balance": 21871.33
+      },
+      {
+        "date": "2026-04-20",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1063.91,
+        "utr": "260420121916",
+        "balance": 20807.42
+      },
+      {
+        "date": "2026-04-21",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1060.44,
+        "utr": "260421568676",
+        "balance": 19746.98
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Mahajan PLC",
+        "type": "NEFT/CR",
+        "amount": 69814,
+        "utr": "260426969809",
+        "balance": 89560.98
+      },
+      {
+        "date": "2026-05-04",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -17641.78,
+        "utr": "260504449117",
+        "balance": 71919.2
+      },
+      {
+        "date": "2026-05-08",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1860.69,
+        "utr": "260508592169",
+        "balance": 70058.51
+      },
+      {
+        "date": "2026-05-08",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -674.1,
+        "utr": "260508919058",
+        "balance": 69384.41
+      },
+      {
+        "date": "2026-05-11",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -896.29,
+        "utr": "260511056507",
+        "balance": 68488.12
+      },
+      {
+        "date": "2026-05-15",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1965.65,
+        "utr": "260515931284",
+        "balance": 66522.47
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Mahajan PLC",
+        "type": "NEFT/CR",
+        "amount": 69814,
+        "utr": "260526526192",
+        "balance": 136336.47
+      },
+      {
+        "date": "2026-06-01",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1420.04,
+        "utr": "260601067950",
+        "balance": 134916.43
+      },
+      {
+        "date": "2026-06-07",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1045.41,
+        "utr": "260607212362",
+        "balance": 133871.02
+      },
+      {
+        "date": "2026-06-10",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1915.74,
+        "utr": "260610968423",
+        "balance": 131955.28
+      },
+      {
+        "date": "2026-06-15",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -785.89,
+        "utr": "260615396878",
+        "balance": 131169.39
+      },
+      {
+        "date": "2026-06-16",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1975.53,
+        "utr": "260616116943",
+        "balance": 129193.86
+      },
+      {
+        "date": "2026-06-19",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -419.31,
+        "utr": "260619058615",
+        "balance": 128774.55
+      },
+      {
+        "date": "2026-06-21",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -546.95,
+        "utr": "260621635470",
+        "balance": 128227.6
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Mahajan PLC",
+        "type": "NEFT/CR",
+        "amount": 69814,
+        "utr": "260625760872",
+        "balance": 198041.6
+      }
+    ]
+  },
+  "P008_photo_mismatch": {
+    "persona_id": "P008_photo_mismatch",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 27861.86,
+    "transactions": [
+      {
+        "date": "2026-04-01",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1366.18,
+        "utr": "260401527383",
+        "balance": 26495.68
+      },
+      {
+        "date": "2026-04-06",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1477.96,
+        "utr": "260406987651",
+        "balance": 25017.72
+      },
+      {
+        "date": "2026-04-11",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -17803.32,
+        "utr": "260411256645",
+        "balance": 7214.4
+      },
+      {
+        "date": "2026-04-18",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -538.96,
+        "utr": "260418218749",
+        "balance": 6675.44
+      },
+      {
+        "date": "2026-04-19",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -847.27,
+        "utr": "260419070178",
+        "balance": 5828.17
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Viswanathan and Sons",
+        "type": "NEFT/CR",
+        "amount": 52312,
+        "utr": "260426423865",
+        "balance": 58140.17
+      },
+      {
+        "date": "2026-05-08",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -993.89,
+        "utr": "260508806719",
+        "balance": 57146.28
+      },
+      {
+        "date": "2026-05-11",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -791.6,
+        "utr": "260511474238",
+        "balance": 56354.68
+      },
+      {
+        "date": "2026-05-14",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -349.03,
+        "utr": "260514063662",
+        "balance": 56005.65
+      },
+      {
+        "date": "2026-05-16",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -396.9,
+        "utr": "260516520655",
+        "balance": 55608.75
+      },
+      {
+        "date": "2026-05-18",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -12260.63,
+        "utr": "260518966602",
+        "balance": 43348.12
+      },
+      {
+        "date": "2026-05-21",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1904.93,
+        "utr": "260521552067",
+        "balance": 41443.19
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Viswanathan and Sons",
+        "type": "NEFT/CR",
+        "amount": 52312,
+        "utr": "260526841410",
+        "balance": 93755.19
+      },
+      {
+        "date": "2026-06-04",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2517.64,
+        "utr": "260604489710",
+        "balance": 91237.55
+      },
+      {
+        "date": "2026-06-07",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -928.75,
+        "utr": "260607723663",
+        "balance": 90308.8
+      },
+      {
+        "date": "2026-06-13",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -15513.73,
+        "utr": "260613907296",
+        "balance": 74795.07
+      },
+      {
+        "date": "2026-06-13",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -376.37,
+        "utr": "260613540880",
+        "balance": 74418.7
+      },
+      {
+        "date": "2026-06-18",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1448.96,
+        "utr": "260618977268",
+        "balance": 72969.74
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Viswanathan and Sons",
+        "type": "NEFT/CR",
+        "amount": 52312,
+        "utr": "260625021482",
+        "balance": 125281.74
+      }
+    ]
+  },
+  "P009_fully_fabricated": {
+    "persona_id": "P009_fully_fabricated",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 33977.15,
+    "transactions": [
+      {
+        "date": "2026-04-01",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1390.8,
+        "utr": "260401099018",
+        "balance": 32586.35
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1585.42,
+        "utr": "260405420449",
+        "balance": 31000.93
+      },
+      {
+        "date": "2026-04-08",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1478.63,
+        "utr": "260408564605",
+        "balance": 29522.3
+      },
+      {
+        "date": "2026-04-18",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -1656.67,
+        "utr": "260418206084",
+        "balance": 27865.63
+      },
+      {
+        "date": "2026-04-20",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -542.74,
+        "utr": "260420703350",
+        "balance": 27322.89
+      },
+      {
+        "date": "2026-04-21",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -11978.81,
+        "utr": "260421398590",
+        "balance": 15344.08
+      },
+      {
+        "date": "2026-04-21",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -410.19,
+        "utr": "260421987225",
+        "balance": 14933.89
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Rama, Raman and Pradhan",
+        "type": "NEFT/CR",
+        "amount": 67398,
+        "utr": "260426827513",
+        "balance": 82331.89
+      },
+      {
+        "date": "2026-05-03",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1407.68,
+        "utr": "260503117117",
+        "balance": 80924.21
+      },
+      {
+        "date": "2026-05-05",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1357.5,
+        "utr": "260505571558",
+        "balance": 79566.71
+      },
+      {
+        "date": "2026-05-13",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -1476.68,
+        "utr": "260513099340",
+        "balance": 78090.03
+      },
+      {
+        "date": "2026-05-14",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -498.15,
+        "utr": "260514676681",
+        "balance": 77591.88
+      },
+      {
+        "date": "2026-05-21",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -11442.18,
+        "utr": "260521435265",
+        "balance": 66149.7
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Rama, Raman and Pradhan",
+        "type": "NEFT/CR",
+        "amount": 67398,
+        "utr": "260526571843",
+        "balance": 133547.7
+      },
+      {
+        "date": "2026-06-02",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1187.9,
+        "utr": "260602025801",
+        "balance": 132359.8
+      },
+      {
+        "date": "2026-06-06",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1076.25,
+        "utr": "260606966534",
+        "balance": 131283.55
+      },
+      {
+        "date": "2026-06-13",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2970.71,
+        "utr": "260613962192",
+        "balance": 128312.84
+      },
+      {
+        "date": "2026-06-16",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -586.89,
+        "utr": "260616519108",
+        "balance": 127725.95
+      },
+      {
+        "date": "2026-06-19",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -478.47,
+        "utr": "260619623223",
+        "balance": 127247.48
+      },
+      {
+        "date": "2026-06-21",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -10982.15,
+        "utr": "260621019640",
+        "balance": 116265.33
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Rama, Raman and Pradhan",
+        "type": "NEFT/CR",
+        "amount": 67398,
+        "utr": "260625642528",
+        "balance": 183663.33
+      }
+    ]
+  },
+  "P013_document_recycling": {
+    "persona_id": "P013_document_recycling",
+    "provider": "bank",
+    "months": 3,
+    "opening_balance": 9886.37,
+    "transactions": [
+      {
+        "date": "2026-04-01",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -399.18,
+        "utr": "260401822476",
+        "balance": 9487.19
+      },
+      {
+        "date": "2026-04-12",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -558.2,
+        "utr": "260412378291",
+        "balance": 8928.99
+      },
+      {
+        "date": "2026-04-12",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -1134.87,
+        "utr": "260412376950",
+        "balance": 7794.12
+      },
+      {
+        "date": "2026-04-18",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -2363.4,
+        "utr": "260418622743",
+        "balance": 5430.72
+      },
+      {
+        "date": "2026-04-19",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2682.63,
+        "utr": "260419695216",
+        "balance": 2748.09
+      },
+      {
+        "date": "2026-04-26",
+        "description": "Salary Credit - Bhattacharyya and Sons",
+        "type": "NEFT/CR",
+        "amount": 25883,
+        "utr": "260426149313",
+        "balance": 28631.09
+      },
+      {
+        "date": "2026-05-09",
+        "description": "Paid to Landlord",
+        "type": "UPI/P2M-debit",
+        "amount": -16037.16,
+        "utr": "260509730005",
+        "balance": 12593.93
+      },
+      {
+        "date": "2026-05-11",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1484.66,
+        "utr": "260511610245",
+        "balance": 11109.27
+      },
+      {
+        "date": "2026-05-14",
+        "description": "Paid to Gym Membership",
+        "type": "UPI/P2M-debit",
+        "amount": -1388.09,
+        "utr": "260514113997",
+        "balance": 9721.18
+      },
+      {
+        "date": "2026-05-14",
+        "description": "Paid to Local Kirana Store",
+        "type": "UPI/P2M-debit",
+        "amount": -475.6,
+        "utr": "260514040360",
+        "balance": 9245.58
+      },
+      {
+        "date": "2026-05-17",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -566.94,
+        "utr": "260517319475",
+        "balance": 8678.64
+      },
+      {
+        "date": "2026-05-26",
+        "description": "Salary Credit - Bhattacharyya and Sons",
+        "type": "NEFT/CR",
+        "amount": 25883,
+        "utr": "260526202291",
+        "balance": 34561.64
+      },
+      {
+        "date": "2026-06-10",
+        "description": "Paid to Amazon",
+        "type": "UPI/P2M-debit",
+        "amount": -2334.26,
+        "utr": "260610068094",
+        "balance": 32227.38
+      },
+      {
+        "date": "2026-06-12",
+        "description": "Paid to BigBasket",
+        "type": "UPI/P2M-debit",
+        "amount": -2391.33,
+        "utr": "260612461947",
+        "balance": 29836.05
+      },
+      {
+        "date": "2026-06-12",
+        "description": "Paid to Airtel",
+        "type": "UPI/P2M-debit",
+        "amount": -624.07,
+        "utr": "260612031834",
+        "balance": 29211.98
+      },
+      {
+        "date": "2026-06-13",
+        "description": "Paid to Electricity Board",
+        "type": "UPI/P2M-debit",
+        "amount": -1589.06,
+        "utr": "260613131946",
+        "balance": 27622.92
+      },
+      {
+        "date": "2026-06-14",
+        "description": "Paid to Swiggy",
+        "type": "UPI/P2M-debit",
+        "amount": -488.71,
+        "utr": "260614163844",
+        "balance": 27134.21
+      },
+      {
+        "date": "2026-06-25",
+        "description": "Salary Credit - Bhattacharyya and Sons",
+        "type": "NEFT/CR",
+        "amount": 25883,
+        "utr": "260625104876",
+        "balance": 53017.21
+      }
+    ]
+  }
+}
