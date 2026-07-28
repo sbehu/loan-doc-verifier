@@ -253,12 +253,29 @@ def build_verdict(persona_id: str, results: dict, investigations: dict) -> dict:
     sal = results["income_salary"]
     if sal["applicable"]:
         gaps = [g for g in sal["gaps"].values() if g is not None]
+        sal_issue_added = False
         if any(g > 0.20 for g in gaps):
             issues.append(("income_salary", "reject", "income mismatch (salary): " + sal["detail"]))
+            sal_issue_added = True
         elif any(0.10 < g <= 0.20 for g in gaps):
             inv = investigations.get("income_salary")
             if inv and inv["assessment"] == "suspicious":
                 issues.append(("income_salary", "reject", f"income mismatch (salary, investigated as suspicious): {inv['reasoning']}"))
+                sal_issue_added = True
+        # A missing bank_credit means declared_vs_bank/slip_vs_bank were both
+        # None and got silently dropped from `gaps` above -- income can look
+        # "clean" purely because the weaker slip-only comparison happened to
+        # pass, with no real bank-statement corroboration behind it at all.
+        # Surface that explicitly instead of reporting full confidence on
+        # partial evidence -- but only if there isn't already a stronger
+        # reject-tier issue reported for this same check.
+        if not sal_issue_added and sal.get("bank_credit") is None:
+            issues.append((
+                "income_salary", "warning",
+                "income verified only against the salary slip -- no matching "
+                "salary credit found in the bank statement, so bank corroboration "
+                "was unavailable: " + sal["detail"]
+            ))
 
     if results["address"]["outcome"] == "needs_resubmission":
         issues.append(("address", "conditional", "address mismatch: " + results["address"]["detail"]))
