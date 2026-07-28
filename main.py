@@ -211,10 +211,14 @@ def build_verdict(persona_id: str, results: dict, investigations: dict) -> dict:
     loan verdicts need to be auditable and explainable.
 
     Rules: document recycling alone -> always REJECT. Otherwise, collect
-    every other real issue present. Two or more issues together -> REJECT.
-    Exactly one issue -> its own severity decides (balance/photo/income
-    -> REJECT even alone, signature -> WARNING_RESUBMISSION, address ->
-    CONDITIONAL_APPROVAL). Zero issues -> APPROVE.
+    every real issue present across all checks. The overall verdict is
+    decided by the WORST severity among them (any reject-tier issue ->
+    REJECT; else any warning-tier issue -> WARNING_RESUBMISSION; else any
+    conditional-tier issue -> CONDITIONAL_APPROVAL), not by how many
+    issues there are -- multiple warning-tier signals shouldn't escalate
+    to the same REJECT as one real reject-tier signal. Every flagged
+    issue is listed in the reasons regardless of tier. Zero issues ->
+    APPROVE.
     """
     if results["recycling"]["flagged"]:
         return {
@@ -283,19 +287,24 @@ def build_verdict(persona_id: str, results: dict, investigations: dict) -> dict:
     if len(issues) == 0:
         return {"persona_id": persona_id, "verdict": "APPROVE", "reasons": ["all checks clean"]}
 
-    if len(issues) >= 2:
-        return {
-            "persona_id": persona_id,
-            "verdict": "REJECT",
-            "reasons": [reason for (_, _, reason) in issues],
-        }
+    # Overall verdict is decided by the WORST severity present, not by how
+    # many issues there are -- two independent warning-tier signals (e.g. an
+    # OCR near-miss plus a missing bank-credit corroboration) shouldn't
+    # escalate to the same REJECT as an actual reject-tier fraud signal.
+    # Every flagged issue is still listed in full, regardless of tier, so
+    # nothing gets silently dropped from what the loan officer sees.
+    severities_present = {severity for (_, severity, _) in issues}
+    if "reject" in severities_present:
+        verdict = "REJECT"
+    elif "warning" in severities_present:
+        verdict = "WARNING_RESUBMISSION"
+    else:
+        verdict = "CONDITIONAL_APPROVAL"
 
-    _, severity, reason = issues[0]
-    verdict_map = {"reject": "REJECT", "warning": "WARNING_RESUBMISSION", "conditional": "CONDITIONAL_APPROVAL"}
     return {
         "persona_id": persona_id,
-        "verdict": verdict_map[severity],
-        "reasons": [reason],
+        "verdict": verdict,
+        "reasons": [reason for (_, _, reason) in issues],
     }
 
 
