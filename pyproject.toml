@@ -11,6 +11,7 @@ dependencies = [
     "flashrank>=0.2.10",
     "openai>=2.45.0",
     "pillow>=12.3.0",
+    "pymupdf>=1.28.0",
     "python-dotenv>=1.2.2",
     "rank-bm25>=0.2.2",
     "sentence-transformers>=5.6.0",

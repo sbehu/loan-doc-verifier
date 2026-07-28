@@ -143,6 +143,38 @@ def _correct_aadhaar(aadhaar: str) -> str:
     return "".join(_LETTER_TO_DIGIT.get(c, c) for c in aadhaar)
 
 
+def _levenshtein(a: str, b: str) -> int:
+    if len(a) < len(b):
+        a, b = b, a
+    previous = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        current = [i]
+        for j, cb in enumerate(b, 1):
+            cost = 0 if ca == cb else 1
+            current.append(min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + cost))
+        previous = current
+    return previous[-1]
+
+
+def _name_is_near_miss(name_a: str, name_b: str) -> bool:
+    """A near-miss is a small difference (at most 2 characters, and at
+    most a quarter of the name's length) between two names. This is
+    deliberately NOT a claim that it's OCR noise rather than real fraud
+    -- a single-character identity fraud (P005: "Ganesan" vs "Genesan")
+    has the exact same edit-distance signature as a single-character
+    OCR misread ("Sambit" vs "Sanbit", confirmed directly against a
+    real Aadhaar card). There is no way to tell these apart from the
+    text alone, so both get routed to manual review rather than either
+    being silently approved or automatically rejected."""
+    if not name_a or not name_b:
+        return False
+    distance = _levenshtein(name_a, name_b)
+    if distance == 0:
+        return False
+    longest = max(len(name_a), len(name_b))
+    return distance <= 2 and distance / longest <= 0.25
+
+
 def check_identity(persona_id: str) -> dict:
     doc_dir = base_dir / "data" / "documents" / persona_id
     form_path = doc_dir / "application_form.png"
@@ -163,19 +195,32 @@ def check_identity(persona_id: str) -> dict:
     form_pan = _correct_pan(_normalize_id(form.get("pan")))
     form_aadhaar = _correct_aadhaar(_normalize_id(form.get("aadhaar")))
 
-    mismatches = []
+    hard_mismatches = []   # clear, unambiguous differences -- reject-worthy
+    review_mismatches = []  # near-miss names -- can't rule out OCR noise, route to manual review
+
+    def _compare_name(doc_label: str, raw_value: str, normalized_value: str) -> None:
+        if not normalized_value or not form_name or normalized_value == form_name:
+            return
+        reason = (
+            f"name on {doc_label} ('{raw_value}') does not match application "
+            f"form ('{form.get('name')}')"
+        )
+        if _name_is_near_miss(normalized_value, form_name):
+            review_mismatches.append(
+                reason + " -- small enough a difference that it could be a vision-model "
+                "OCR misread rather than a real discrepancy; flagged for manual review "
+                "rather than automatic rejection"
+            )
+        else:
+            hard_mismatches.append(reason)
 
     if aadhaar_path.exists():
         aadhaar_doc = _extract(aadhaar_path, AADHAAR_PROMPT)
         aadhaar_name = _normalize_name(aadhaar_doc.get("name"))
         aadhaar_number = _correct_aadhaar(_normalize_id(aadhaar_doc.get("aadhaar_number")))
-        if aadhaar_name and form_name and aadhaar_name != form_name:
-            mismatches.append(
-                f"name on Aadhaar card ('{aadhaar_doc.get('name')}') does not match "
-                f"application form ('{form.get('name')}')"
-            )
+        _compare_name("Aadhaar card", aadhaar_doc.get("name"), aadhaar_name)
         if aadhaar_number and form_aadhaar and aadhaar_number != form_aadhaar:
-            mismatches.append(
+            hard_mismatches.append(
                 f"Aadhaar number on card ({aadhaar_doc.get('aadhaar_number')}) does not "
                 f"match application form ({form.get('aadhaar')})"
             )
@@ -184,13 +229,9 @@ def check_identity(persona_id: str) -> dict:
         pan_doc = _extract(pan_path, PAN_PROMPT)
         pan_name = _normalize_name(pan_doc.get("name"))
         pan_number = _correct_pan(_normalize_id(pan_doc.get("pan_number")))
-        if pan_name and form_name and pan_name != form_name:
-            mismatches.append(
-                f"name on PAN card ('{pan_doc.get('name')}') does not match "
-                f"application form ('{form.get('name')}')"
-            )
+        _compare_name("PAN card", pan_doc.get("name"), pan_name)
         if pan_number and form_pan and pan_number != form_pan:
-            mismatches.append(
+            hard_mismatches.append(
                 f"PAN number on card ({pan_doc.get('pan_number')}) does not match "
                 f"application form ({form.get('pan')})"
             )
@@ -198,17 +239,15 @@ def check_identity(persona_id: str) -> dict:
     if bill_path.exists():
         bill_doc = _extract(bill_path, BILL_PROMPT)
         bill_name = _normalize_name(bill_doc.get("name"))
-        if bill_name and form_name and bill_name != form_name:
-            mismatches.append(
-                f"account holder name on electricity bill ('{bill_doc.get('name')}') "
-                f"does not match application form ('{form.get('name')}')"
-            )
+        _compare_name("electricity bill", bill_doc.get("name"), bill_name)
 
+    all_reasons = hard_mismatches + review_mismatches
     return {
         "persona_id": persona_id,
         "check": "identity_consistency",
-        "flagged": len(mismatches) > 0,
-        "detail": "; ".join(mismatches) if mismatches else "name, PAN, and Aadhaar consistent across all documents",
+        "flagged": len(hard_mismatches) > 0,
+        "needs_review": len(review_mismatches) > 0,
+        "detail": "; ".join(all_reasons) if all_reasons else "name, PAN, and Aadhaar consistent across all documents",
     }
 
 

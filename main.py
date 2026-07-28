@@ -231,8 +231,11 @@ def build_verdict(persona_id: str, results: dict, investigations: dict) -> dict:
     if results["photo_match"]["flagged"]:
         issues.append(("photo_match", "reject", "photo mismatch: " + results["photo_match"]["detail"]))
 
-    if results["identity"]["flagged"]:
-        issues.append(("identity", "reject", "identity mismatch: " + results["identity"]["detail"]))
+    identity = results["identity"]
+    if identity["flagged"]:
+        issues.append(("identity", "reject", "identity mismatch: " + identity["detail"]))
+    elif identity.get("needs_review"):
+        issues.append(("identity", "warning", "identity needs manual review: " + identity["detail"]))
 
     sig = results["signature"]
     if not sig["same_person"] and sig["confidence"] >= 50:

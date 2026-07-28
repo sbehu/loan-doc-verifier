@@ -17,6 +17,7 @@ import json
 import uuid
 from pathlib import Path
 
+import fitz  # PyMuPDF
 import streamlit as st
 from PIL import Image
 from openai import OpenAI
@@ -50,15 +51,78 @@ VERDICT_COLOR = {
 }
 
 
-def save_upload(uploaded_file, dest_path: Path) -> None:
-    """Re-encodes whatever format was uploaded (jpg, png, ...) as PNG at
-    the exact filename the checks package expects."""
+def _pdf_to_images(pdf_bytes: bytes, dpi: int = 200, password: str | None = None) -> list[Image.Image]:
+    """Renders every page of a PDF to a PIL Image. Real-world bank
+    statements, salary slips, and UPI exports are very commonly PDFs --
+    none of the checks know how to read a PDF directly (they all open
+    the document as a single image), so any PDF upload is converted
+    here before it ever reaches the pipeline.
+
+    Bank statement PDFs are frequently password-protected -- the
+    password is typed directly into this app (never sent to Claude),
+    and used only locally to unlock the PDF for rendering."""
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    if doc.needs_pass:
+        if not password or not doc.authenticate(password):
+            raise ValueError("PDF is password-protected and the password provided didn't unlock it")
+    matrix = fitz.Matrix(dpi / 72, dpi / 72)
+    images = []
+    for page in doc:
+        pix = page.get_pixmap(matrix=matrix)
+        images.append(Image.frombytes("RGB", (pix.width, pix.height), pix.samples))
+    return images
+
+
+def _stack_vertically(images: list[Image.Image]) -> Image.Image:
+    width = max(img.width for img in images)
+    total_height = sum(img.height for img in images)
+    canvas = Image.new("RGB", (width, total_height), "white")
+    y = 0
+    for img in images:
+        canvas.paste(img, (0, y))
+        y += img.height
+    return canvas
+
+
+MAX_SINGLE_PAGE_DIMENSION = 2000
+
+
+def save_upload(uploaded_file, dest_path: Path, pdf_password: str | None = None) -> None:
+    """Re-encodes whatever format was uploaded (jpg, png, pdf) as PNG at
+    the exact filename the checks package expects. PDFs get converted
+    to image(s) first -- bank_statement and upi_statement pages are
+    stacked into one tall image (those checks already chunk tall images
+    by height, so this fits the existing design), everything else keeps
+    only the first page, since those checks treat the document as a
+    single image.
+
+    Non-statement documents (selfie, aadhaar, PAN, etc.) get capped to
+    MAX_SINGLE_PAGE_DIMENSION on their longest side before saving.
+    Real phone-camera photos are often several MP -- re-encoded as
+    lossless PNG that can exceed AWS Rekognition's hard 5MB-per-image
+    limit (hit directly: a real selfie upload triggered
+    "targetImage.bytes" > 5242880 bytes on compare_faces). Bank/UPI
+    statements are deliberately excluded from this cap -- their own
+    extraction pipeline already manages resolution for OCR/table
+    detection, and shrinking them here could hurt text readability."""
     dest_path.parent.mkdir(parents=True, exist_ok=True)
-    img = Image.open(uploaded_file).convert("RGB")
+    is_pdf = uploaded_file.name.lower().endswith(".pdf") or uploaded_file.type == "application/pdf"
+    stackable = dest_path.stem.startswith("bank_statement") or dest_path.stem.startswith("upi_statement")
+
+    if is_pdf:
+        pages = _pdf_to_images(uploaded_file.getvalue(), password=pdf_password)
+        img = _stack_vertically(pages) if stackable else pages[0]
+    else:
+        img = Image.open(uploaded_file).convert("RGB")
+
+    img = img.convert("RGB")
+    if not stackable and max(img.size) > MAX_SINGLE_PAGE_DIMENSION:
+        img.thumbnail((MAX_SINGLE_PAGE_DIMENSION, MAX_SINGLE_PAGE_DIMENSION), Image.LANCZOS)
+
     img.save(dest_path, "PNG")
 
 
-def run_verification(uploaded: dict) -> tuple[str, dict]:
+def run_verification(uploaded: dict, pdf_passwords: dict) -> tuple[str, dict]:
     persona_id = f"_uploads/{uuid.uuid4().hex[:10]}"
     doc_dir = base_dir / "data" / "documents" / persona_id
     for key, value in uploaded.items():
@@ -66,7 +130,7 @@ def run_verification(uploaded: dict) -> tuple[str, dict]:
             for i, f in enumerate(value, 1):
                 save_upload(f, doc_dir / f"upi_statement_{i}.png")
         else:
-            save_upload(value, doc_dir / f"{key}.png")
+            save_upload(value, doc_dir / f"{key}.png", pdf_password=pdf_passwords.get(key))
 
     progress = st.progress(0, text="Saving uploaded documents...")
 
@@ -89,20 +153,26 @@ employment_type = st.radio("Employment type", ["Salaried", "Self-employed"], hor
 
 st.subheader("Upload documents")
 uploaded = {}
+pdf_passwords = {}
 cols = st.columns(2)
 for i, (key, label) in enumerate(COMMON_DOCS):
     with cols[i % 2]:
-        uploaded[key] = st.file_uploader(label, type=["png", "jpg", "jpeg"], key=key)
+        uploaded[key] = st.file_uploader(label, type=["png", "jpg", "jpeg", "pdf"], key=key)
+        if key == "bank_statement":
+            pdf_passwords[key] = st.text_input(
+                "Bank statement PDF password (leave blank if not password-protected)",
+                type="password", key="bank_statement_pw",
+            )
 
 with cols[len(COMMON_DOCS) % 2]:
     if employment_type == "Salaried":
         uploaded["salary_slip"] = st.file_uploader(
-            "Salary Slip", type=["png", "jpg", "jpeg"], key="salary_slip"
+            "Salary Slip", type=["png", "jpg", "jpeg", "pdf"], key="salary_slip"
         )
     else:
         uploaded["upi_statement"] = st.file_uploader(
             "UPI Statement(s) -- upload one per account if the applicant has multiple",
-            type=["png", "jpg", "jpeg"], accept_multiple_files=True, key="upi_statement",
+            type=["png", "jpg", "jpeg", "pdf"], accept_multiple_files=True, key="upi_statement",
         )
 
 required_keys = [k for k, _ in COMMON_DOCS] + (
@@ -111,7 +181,7 @@ required_keys = [k for k, _ in COMMON_DOCS] + (
 all_present = all(uploaded.get(k) for k in required_keys)
 
 if st.button("Run Verification", disabled=not all_present, type="primary"):
-    persona_id, outcome = run_verification(uploaded)
+    persona_id, outcome = run_verification(uploaded, pdf_passwords)
     st.session_state["persona_id"] = persona_id
     st.session_state["outcome"] = outcome
     st.session_state["messages"] = []
