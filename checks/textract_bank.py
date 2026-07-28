@@ -49,6 +49,17 @@ MAX_SIDE = 4000  # Textract's own documented limit is 10,000px, but testing
                   # collapsed to near-empty. Staying well under that cliff.
 OVERLAP = 500
 
+EDGE_MARGIN_PX = 150  # any row whose bounding box falls within this many
+                       # pixels of an INTERNAL chunk boundary gets discarded.
+                       # Confirmed directly on a real (non-synthetic) bank
+                       # statement: a multi-line row got cut mid-narration by
+                       # an arbitrary chunk slice, and the leftover fragment
+                       # was wrongly stitched onto the following row,
+                       # corrupting its amount/balance. The overlapping
+                       # neighboring chunk already captures the same row
+                       # fully, away from its own edges -- so discarding the
+                       # edge-adjacent copy loses nothing.
+
 DATE_KEYWORDS = ["date"]
 DESC_KEYWORDS = ["narration", "description", "particulars"]
 WITHDRAWAL_KEYWORDS = ["withdraw", "debit"]
@@ -129,10 +140,13 @@ def _cells_from_blocks(blocks: list) -> list:
                         word = block_map.get(word_id)
                         if word and word["BlockType"] in ("WORD", "SELECTION_ELEMENT"):
                             text_parts.append(word.get("Text", ""))
+                bbox = cell["Geometry"]["BoundingBox"]
                 table_cells.append({
                     "row": cell["RowIndex"],
                     "col": cell["ColumnIndex"],
                     "text": " ".join(text_parts).strip(),
+                    "top": bbox["Top"],
+                    "bottom": bbox["Top"] + bbox["Height"],
                 })
         if table_cells:
             tables.append(table_cells)
@@ -186,16 +200,23 @@ def extract_bank_statement_rows(persona_id: str) -> list:
     all_rows = []
     seen = set()
 
+    is_last_chunk_idx = len(chunk_starts) - 1
+
     for i, y in enumerate(chunk_starts):
         crop = img.crop((0, y, w, min(y + MAX_SIDE, h)))
+        crop_height = crop.height
         resp = textract.analyze_document(
             Document={"Bytes": _to_png_bytes(crop)}, FeatureTypes=["TABLES"]
         )
         cells = _cells_from_blocks(resp["Blocks"])
 
         grid = {}
+        row_extent = {}  # row_idx -> [min_top, max_bottom], normalized 0-1 within this crop
         for c in cells:
             grid.setdefault(c["row"], {})[c["col"]] = c["text"]
+            extent = row_extent.setdefault(c["row"], [c["top"], c["bottom"]])
+            extent[0] = min(extent[0], c["top"])
+            extent[1] = max(extent[1], c["bottom"])
         if not grid:
             continue
 
@@ -209,6 +230,16 @@ def extract_bank_statement_rows(persona_id: str) -> list:
 
         for row_idx in sorted(grid.keys()):
             row = grid[row_idx]
+
+            if row_idx in row_extent:
+                top_px = row_extent[row_idx][0] * crop_height
+                bottom_px = row_extent[row_idx][1] * crop_height
+                near_top_edge = top_px < EDGE_MARGIN_PX
+                near_bottom_edge = (crop_height - bottom_px) < EDGE_MARGIN_PX
+                if near_top_edge and i != 0:
+                    continue  # previous chunk's overlap already captured this row intact
+                if near_bottom_edge and i != is_last_chunk_idx:
+                    continue  # next chunk's overlap will capture this row intact
 
             balance = _clean_number(row.get(col_map["balance"]))
             if balance is None:
