@@ -24,6 +24,7 @@ from tqdm import tqdm
 from checks.signature import check_signature
 from checks.balance import check_balance
 from checks.address import check_address
+from checks.identity import check_identity
 from checks.photo_match import check_photo_match
 from checks.income_upi import check_income_upi, extract_income_rows
 from checks.income_salary import check_income_salary, get_bank_salary_credit
@@ -78,6 +79,7 @@ def run_all_checks(persona_id: str) -> dict:
         "signature": _run_named("signature", check_signature, persona_id),
         "balance": _run_named("balance", check_balance, persona_id),
         "address": _run_named("address", check_address, persona_id),
+        "identity": _run_named("identity", check_identity, persona_id),
         "photo_match": _run_named("photo_match", check_photo_match, persona_id),
         "income_upi": _run_named("income_upi", check_income_upi, persona_id),
         "income_salary": _run_named("income_salary", check_income_salary, persona_id),
@@ -228,6 +230,9 @@ def build_verdict(persona_id: str, results: dict, investigations: dict) -> dict:
 
     if results["photo_match"]["flagged"]:
         issues.append(("photo_match", "reject", "photo mismatch: " + results["photo_match"]["detail"]))
+
+    if results["identity"]["flagged"]:
+        issues.append(("identity", "reject", "identity mismatch: " + results["identity"]["detail"]))
 
     sig = results["signature"]
     if not sig["same_person"] and sig["confidence"] >= 50:
