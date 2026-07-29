@@ -175,6 +175,23 @@ def _name_is_near_miss(name_a: str, name_b: str) -> bool:
     return distance <= 2 and distance / longest <= 0.25
 
 
+def _safe_extract(image_path: Path, prompt: str, doc_label: str):
+    """Wraps _extract so a persistent vision-API failure on one document
+    (confirmed to happen in production: gpt-4o returned empty content for
+    a real Aadhaar image on all 3 attempts) can't crash the whole
+    verification pipeline. Returns (result, error_note) -- error_note is
+    None on success. A failure here means "couldn't verify this specific
+    document", which should route to manual review, not silently pass as
+    clean and not take down every other check in the process."""
+    try:
+        return _extract(image_path, prompt), None
+    except Exception as e:
+        return None, (
+            f"could not verify {doc_label} -- vision model failed to read it "
+            f"after multiple attempts ({e})"
+        )
+
+
 def check_identity(persona_id: str) -> dict:
     doc_dir = base_dir / "data" / "documents" / persona_id
     form_path = doc_dir / "application_form.png"
@@ -190,7 +207,15 @@ def check_identity(persona_id: str) -> dict:
             "detail": "no application form present -- check not applicable",
         }
 
-    form = _extract(form_path, FORM_PROMPT)
+    form, form_error = _safe_extract(form_path, FORM_PROMPT, "application form")
+    if form_error:
+        return {
+            "persona_id": persona_id,
+            "check": "identity_consistency",
+            "flagged": False,
+            "needs_review": True,
+            "detail": form_error,
+        }
     form_name = _normalize_name(form.get("name"))
     form_pan = _correct_pan(_normalize_id(form.get("pan")))
     form_aadhaar = _correct_aadhaar(_normalize_id(form.get("aadhaar")))
@@ -215,31 +240,40 @@ def check_identity(persona_id: str) -> dict:
             hard_mismatches.append(reason)
 
     if aadhaar_path.exists():
-        aadhaar_doc = _extract(aadhaar_path, AADHAAR_PROMPT)
-        aadhaar_name = _normalize_name(aadhaar_doc.get("name"))
-        aadhaar_number = _correct_aadhaar(_normalize_id(aadhaar_doc.get("aadhaar_number")))
-        _compare_name("Aadhaar card", aadhaar_doc.get("name"), aadhaar_name)
-        if aadhaar_number and form_aadhaar and aadhaar_number != form_aadhaar:
-            hard_mismatches.append(
-                f"Aadhaar number on card ({aadhaar_doc.get('aadhaar_number')}) does not "
-                f"match application form ({form.get('aadhaar')})"
-            )
+        aadhaar_doc, aadhaar_error = _safe_extract(aadhaar_path, AADHAAR_PROMPT, "Aadhaar card")
+        if aadhaar_error:
+            review_mismatches.append(aadhaar_error)
+        else:
+            aadhaar_name = _normalize_name(aadhaar_doc.get("name"))
+            aadhaar_number = _correct_aadhaar(_normalize_id(aadhaar_doc.get("aadhaar_number")))
+            _compare_name("Aadhaar card", aadhaar_doc.get("name"), aadhaar_name)
+            if aadhaar_number and form_aadhaar and aadhaar_number != form_aadhaar:
+                hard_mismatches.append(
+                    f"Aadhaar number on card ({aadhaar_doc.get('aadhaar_number')}) does not "
+                    f"match application form ({form.get('aadhaar')})"
+                )
 
     if pan_path.exists():
-        pan_doc = _extract(pan_path, PAN_PROMPT)
-        pan_name = _normalize_name(pan_doc.get("name"))
-        pan_number = _correct_pan(_normalize_id(pan_doc.get("pan_number")))
-        _compare_name("PAN card", pan_doc.get("name"), pan_name)
-        if pan_number and form_pan and pan_number != form_pan:
-            hard_mismatches.append(
-                f"PAN number on card ({pan_doc.get('pan_number')}) does not match "
-                f"application form ({form.get('pan')})"
-            )
+        pan_doc, pan_error = _safe_extract(pan_path, PAN_PROMPT, "PAN card")
+        if pan_error:
+            review_mismatches.append(pan_error)
+        else:
+            pan_name = _normalize_name(pan_doc.get("name"))
+            pan_number = _correct_pan(_normalize_id(pan_doc.get("pan_number")))
+            _compare_name("PAN card", pan_doc.get("name"), pan_name)
+            if pan_number and form_pan and pan_number != form_pan:
+                hard_mismatches.append(
+                    f"PAN number on card ({pan_doc.get('pan_number')}) does not match "
+                    f"application form ({form.get('pan')})"
+                )
 
     if bill_path.exists():
-        bill_doc = _extract(bill_path, BILL_PROMPT)
-        bill_name = _normalize_name(bill_doc.get("name"))
-        _compare_name("electricity bill", bill_doc.get("name"), bill_name)
+        bill_doc, bill_error = _safe_extract(bill_path, BILL_PROMPT, "electricity bill")
+        if bill_error:
+            review_mismatches.append(bill_error)
+        else:
+            bill_name = _normalize_name(bill_doc.get("name"))
+            _compare_name("electricity bill", bill_doc.get("name"), bill_name)
 
     all_reasons = hard_mismatches + review_mismatches
     return {
