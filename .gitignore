@@ -16,7 +16,12 @@ wheels/
 data/documents/_uploads/
 
 # Not needed to run the deployed app -- dataset generation scripts,
-# earlier throwaway experiments, and interview-prep scratch notes
+# earlier throwaway experiments, and interview-prep scratch notes.
+# The eval script and its results are the exception -- README links to
+# them directly, so they're tracked even though the rest of
+# experiments/ stays ignored.
 dataset_creation/
-experiments/
+experiments/*
+!experiments/08_eval_metrics.py
+!experiments/eval_results.json
 interview_prep/

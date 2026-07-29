@@ -1,0 +1,171 @@
+{
+  "confusion_matrix": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 2,
+    "tn": 4
+  },
+  "metrics": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1": 0.888888888888889,
+    "fpr": 0.0,
+    "fnr": 0.2
+  },
+  "rows": [
+    {
+      "persona_id": "P001_clean_salaried",
+      "scenario": "clean_salaried",
+      "fraud_type": null,
+      "truth_positive": false,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "TN",
+      "expected_check": null,
+      "check_hit": null
+    },
+    {
+      "persona_id": "P002_clean_thin_file",
+      "scenario": "clean_thin_file",
+      "fraud_type": null,
+      "truth_positive": false,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "TN",
+      "expected_check": null,
+      "check_hit": null
+    },
+    {
+      "persona_id": "P003_doc_tamper_careless",
+      "scenario": "doc_tamper_careless",
+      "fraud_type": "doc_tamper_careless",
+      "truth_positive": true,
+      "verdict": "REJECT",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "balance",
+      "check_hit": true
+    },
+    {
+      "persona_id": "P004_doc_tamper_careful",
+      "scenario": "doc_tamper_careful",
+      "fraud_type": "doc_tamper_careful",
+      "truth_positive": true,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "FN",
+      "expected_check": "balance",
+      "check_hit": false
+    },
+    {
+      "persona_id": "P005_identity_mismatch",
+      "scenario": "identity_mismatch",
+      "fraud_type": "identity_mismatch",
+      "truth_positive": true,
+      "verdict": "WARNING_RESUBMISSION",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "identity",
+      "check_hit": true
+    },
+    {
+      "persona_id": "P006_income_mismatch",
+      "scenario": "income_mismatch",
+      "fraud_type": "income_mismatch",
+      "truth_positive": true,
+      "verdict": "REJECT",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "income_salary",
+      "check_hit": false
+    },
+    {
+      "persona_id": "P007_signature_forged",
+      "scenario": "signature_forged",
+      "fraud_type": "signature_forged",
+      "truth_positive": true,
+      "verdict": "WARNING_RESUBMISSION",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "signature",
+      "check_hit": false
+    },
+    {
+      "persona_id": "P008_photo_mismatch",
+      "scenario": "photo_mismatch",
+      "fraud_type": "photo_mismatch",
+      "truth_positive": true,
+      "verdict": "REJECT",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "photo_match",
+      "check_hit": true
+    },
+    {
+      "persona_id": "P009_fully_fabricated",
+      "scenario": "fully_fabricated",
+      "fraud_type": "fully_fabricated",
+      "truth_positive": true,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "FN",
+      "expected_check": null,
+      "check_hit": null
+    },
+    {
+      "persona_id": "P010_stale_address",
+      "scenario": "stale_address",
+      "fraud_type": "stale_address",
+      "truth_positive": true,
+      "verdict": "CONDITIONAL_APPROVAL",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "address",
+      "check_hit": false
+    },
+    {
+      "persona_id": "P011_clean_thin_file_noisy",
+      "scenario": "clean_thin_file_noisy",
+      "fraud_type": null,
+      "truth_positive": false,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "TN",
+      "expected_check": null,
+      "check_hit": null
+    },
+    {
+      "persona_id": "P012_clean_multi_upi_accounts",
+      "scenario": "clean_multi_upi_accounts",
+      "fraud_type": null,
+      "truth_positive": false,
+      "verdict": "APPROVE",
+      "pred_positive": false,
+      "category": "TN",
+      "expected_check": null,
+      "check_hit": null
+    },
+    {
+      "persona_id": "P013_document_recycling",
+      "scenario": "document_recycling",
+      "fraud_type": "document_recycling",
+      "truth_positive": true,
+      "verdict": "REJECT",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "recycling",
+      "check_hit": true
+    },
+    {
+      "persona_id": "P014_document_recycling",
+      "scenario": "document_recycling",
+      "fraud_type": "document_recycling",
+      "truth_positive": true,
+      "verdict": "REJECT",
+      "pred_positive": true,
+      "category": "TP",
+      "expected_check": "recycling",
+      "check_hit": true
+    }
+  ]
+}
