@@ -31,7 +31,7 @@ Built as a hands-on demonstration of applied/agentic AI engineering: real docume
 
 ## Tech stack
 
-Python 3.12, `uv` for dependency management, Streamlit for the UI, OpenAI GPT-4o for vision extraction and reasoning, AWS Textract for table extraction, AWS Rekognition for face comparison, ChromaDB + `sentence-transformers` (CLIP) for embedding search, PyMuPDF for PDF handling. Deployed as a Docker container on AWS ECS Fargate behind an Application Load Balancer, with GitHub Actions building and pushing to ECR and forcing a new ECS deployment on every push to `main`.
+Python 3.12, uv for dependency management, Streamlit for the UI, OpenAI GPT-4o for vision extraction and reasoning, AWS Textract for table extraction, AWS Rekognition for face comparison, ChromaDB + `sentence-transformers` (CLIP) for embedding search, PyMuPDF for PDF handling. Deployed as a Docker container on AWS ECS Fargate behind an Application Load Balancer, with GitHub Actions building and pushing to ECR and forcing a new ECS deployment on every push to `main`.
 
 ## Running locally
 
