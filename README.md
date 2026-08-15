@@ -27,7 +27,7 @@ Built as a hands-on demonstration of applied/agentic AI engineering: real docume
 | Photo match | AWS Rekognition `CompareFaces` between the Aadhaar photo and a live selfie -- a purpose-built face-matching service rather than an LLM judgment call. |
 | Income (salaried) | Three-way reconciliation: declared income (form) vs. net salary (payslip) vs. actual salary credits (bank statement). |
 | Income (self-employed) | Declared income vs. actual credits extracted from UPI transaction history (Google Pay / PhonePe / Paytm), excluding transactions tagged personal. |
-| Document recycling | CLIP embeddings (via ChromaDB) find each applicant's closest signature match across the whole applicant pool; only the closest candidate gets a precise vision-LLM confirmation, so this scales without comparing every pair directly. |
+| Document recycling | CLIP embeddings (via ChromaDB) find each applicant's closest signature match across the whole applicant pool; only the closest candidate gets a precise vision-LLM confirmation, so this scales without comparing every pair directly. 
 
 ## Tech stack
 
